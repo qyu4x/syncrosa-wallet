@@ -1,0 +1,40 @@
+version: "3"
+services:
+  accounts-service-postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=account_service
+      - POSTGRES_INITDB_ARGS="--data-checksums"
+    volumes:
+      - ./database.sql:/docker-entrypoint-initdb.d/init.sql
+      - accounts-service-data-master:/var/lib/postgresql/data
+    networks:
+      - accounts-networks
+  accounts-service-backend:
+    container_name: accounts-service-backend
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=${ENVIRONMENT:-dev}
+      - DB_USER=postgres
+      - DB_PASSWORD=secret
+      - DB_HOST=accounts-service-postgres
+      - DB_PORT=5432
+      - DB_DATABASE=account_service
+    depends_on:
+      - accounts-service-postgres
+    networks:
+      - accounts-networks
+networks:
+  accounts-networks:
+    name: accounts-networks
+
+volumes:
+  accounts-service-data-master:
+  accounts-service-data-slaves:
+
