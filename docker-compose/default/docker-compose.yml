@@ -1,83 +1,68 @@
 version: "3.3"
 services:
-  accounts-db:
-    container_name: accounts-db
-    image: postgres:latest
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secret
-      POSTGRES_INITDB_ARGS: "--data-checksums"
-      POSTGRES_DB: account_service
-    volumes:
-      - ../../users-service/database.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - meow-networks
+#  accounts-db:
+#    container_name: accounts-db
+#    ports:
+#      - 5432:5432
+#    environment:
+#      POSTGRES_DB: account_service
+#    volumes:
+#      - ../../users-service/database.sql:/docker-entrypoint-initdb.d/init.sql
 #    extends:
 #      file: common-config.yml
 #      service: microservice-db-config
+#
+#  loans-db:
+#    container_name: loans-db
+#    image: postgres:latest
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 10
+#      start_period: 10s
+#    ports:
+#      - 5434:5432
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: secret
+#      POSTGRES_INITDB_ARGS: "--data-checksums"
+#      POSTGRES_DB: loan_service
+#    volumes:
+#      - ../../loans-service/database.sql:/docker-entrypoint-initdb.d/init.sql
+#    networks:
+#      - meow-networks
+##    extends:
+##      file: common-config.yml
+##      service: microservice-db-config
+#
+#  cards-db:
+#    container_name: cards-db
+#    image: postgres:latest
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 10
+#      start_period: 10s
+#    ports:
+#      - 5436:5432
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: secret
+#      POSTGRES_INITDB_ARGS: "--data-checksums"
+#      POSTGRES_DB: card-service
+#    volumes:
+#      - ../../cards-service/database.sql:/docker-entrypoint-initdb.d/init.sql
+#    networks:
+#      - meow-networks
+##    extends:
+##      file: common-config.yml
+##      service: microservice-db-config
 
-  loans-db:
-    container_name: loans-db
-    image: postgres:latest
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
-    ports:
-      - 5434:5432
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secret
-      POSTGRES_INITDB_ARGS: "--data-checksums"
-      POSTGRES_DB: loan_service
-    volumes:
-      - ../../loans-service/database.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - meow-networks
-#    extends:
-#      file: common-config.yml
-#      service: microservice-db-config
-
-  cards-db:
-    container_name: cards-db
-    image: postgres:latest
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
-    ports:
-      - 5436:5432
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secret
-      POSTGRES_INITDB_ARGS: "--data-checksums"
-      POSTGRES_DB: card-service
-    volumes:
-      - ../../cards-service/database.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - meow-networks
-#    extends:
-#      file: common-config.yml
-#      service: microservice-db-config
-
-  config-server:
-    build:
-      context: ../../config-server
-      dockerfile: Dockerfile
-#    image: "hikaruyuzu/configserver:latest"
-    container_name: config-server
+  configserver:
+    image: "hikaruyuzu/config-server:s8"
+    container_name: configserver
     ports:
       - 8888:8888
     healthcheck:
@@ -86,101 +71,89 @@ services:
       timeout: 5s
       retries: 10
       start_period: 10s
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - meow-networks
-#    extends:
-#      file: common-config.yml
-#      service: microservice-base-config
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+    environment:
+      SPRING_APPLICATION_NAME: "configserver"
+
+  eurekaserver:
+    image: "hikaruyuzu/eureka-server:s8"
+    container_name: eurekaserver
+    ports:
+      - "8761:8761"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_APPLICATION_NAME: "eurekaserver"
 
   accounts:
-    build:
-      context: ../../users-service
-      dockerfile: Dockerfile
-#    image: "hikaruyuzu/accounts-service"
+    image: "hikaruyuzu/users-service:s8"
     container_name: accounts-service
     ports:
       - 8080:8080
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      SPRING_CONFIG_IMPORT: http://config-server:8888
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: secret
       SPRING_APPLICATION_NAME: "accounts"
-      SPRING_DATASOURCE_URL: jdbc:postgresql://accounts-db:5432/account_service
-    depends_on:
-      accounts-db:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - meow-networks
-#    extends:
-#      file: common-config.yml
-#      service: microservice-configserver-config
+#    depends_on:
+#      accounts-db:
+#        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
 
 
   loans:
-    build:
-      context: ../../loans-service
-      dockerfile: Dockerfile
-#    image: "hikaruyuzu/loans-service"
+    image: "hikaruyuzu/loans-service:s8"
     container_name: loans-service
     ports:
       - 8090:8080
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      SPRING_CONFIG_IMPORT: http://config-server:8888
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: secret
       SPRING_APPLICATION_NAME: "loans"
-      SPRING_DATASOURCE_URL: jdbc:postgresql://loans-db:5434/loan_service
-    depends_on:
-      loans-db:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - meow-networks
-#    extends:
-#      file: common-config.yml
-#      service: microservice-configserver-config
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
 
   cards:
-    build:
-      context: ../../cards-service
-      dockerfile: Dockerfile
-#    image: "hikaruyuzu/cards-service"
+    image: "hikaruyuzu/cards-service:s8"
     container_name: cards-service
     ports:
       - 9000:8080
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      SPRING_CONFIG_IMPORT: http://config-server:8888
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: secret
       SPRING_APPLICATION_NAME: "cards"
-      SPRING_DATASOURCE_URL: jdbc:postgresql://cards-db:5436/card_service
-    depends_on:
-      cards-db:
-        condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          memory: 700m
-    networks:
-      - meow-networks
-#    extends:
-#      file: common-config.yml
-#      service: microservice-configserver-config
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
 
 networks:
   meow-networks:
+    name: meow-networks
     driver: bridge

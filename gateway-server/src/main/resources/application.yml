@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: ${SPRING_APPLICATION_NAME:gatewayserver}
+  config:
+    import: configserver:${SPRING_CONFIG_IMPORT:http://localhost:8888}
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: "gatewayserver"
+    description: "Gateway server for synrosa wallet Application"
+    version: "1.0.0"

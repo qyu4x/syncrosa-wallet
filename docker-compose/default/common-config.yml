@@ -30,12 +30,18 @@ services:
     extends:
       service: microservice-base-config
     depends_on:
-      config-server:
+      configserver:
         condition: service_healthy
     environment:
-      SPRING_PROFILES_ACTIVE: prod
-      SPRING_CONFIG_IMPORT: http://config-server:8888
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: secret
+      SPRING_CONFIG_IMPORT: http://configserver:8888
+#      SPRING_DATASOURCE_USERNAME: postgres
+#      SPRING_DATASOURCE_PASSWORD: secret
+
+
+  microservice-eureka-config:
+    extends:
+      service: microservice-configserver-config
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE: http://eurekaserver:8761
 
 

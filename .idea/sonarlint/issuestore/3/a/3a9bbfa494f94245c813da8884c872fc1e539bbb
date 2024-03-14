@@ -1,0 +1,7 @@
+
+h
+java:S6204R"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(´ êç
+9
+java:S2119k"Save and re-use this "Random".(¾Ê¬§þÿÿÿÿ
+F
+java:S1128"+Remove this unused import 'java.util.UUID'.(ÀãÄ£úÿÿÿÿ
