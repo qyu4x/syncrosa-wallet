@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c857fe7-be51-4f21-905d-8865b4021fd1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/docker-compose/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
@@ -15,22 +16,29 @@
       <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/pom.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/java/com/syncrosa/configserver/ConfigServerApplication.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/resources/config/accounts-dev.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/resources/config/accounts-prod.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/resources/config/cards-dev.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/resources/config/cards-prod.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/resources/config/loans-dev.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/resources/config/loans-prod.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/test/java/com/syncrosa/configserver/ConfigServerApplicationTests.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/docker-compose/default/common-config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hikari-microsync-code001/loans-service/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hikari-microsync-code001/loans-service/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hikari-microsync-code001/loans-service/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hikari-microsync-code001/loans-service/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hikari-microsync-code001/loans-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hikari-microsync-code001/loans-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cards-service/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/resources/config/cards-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cards-service/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/resources/config/cards-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway-server/src/main/java/com/syncrosa/gatewayserver/filters/RequestTraceFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway-server/src/main/java/com/syncrosa/gatewayserver/filters/RequestTraceFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/loans-service/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/resources/config/loans-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/loans-service/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/resources/config/loans-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/syncrosa/usersservice/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/syncrosa/usersservice/controller/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/resources/config/accounts-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users-service/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/src/main/resources/config/accounts-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cards-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cards-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cards-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose/default/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose/default/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eureka-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loans-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/loans-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loans-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/loans-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +86,7 @@
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Development/LEARN/spring-boot/microservices/hikari-microsync-code002/gateway-server",
+    "last_opened_file_path": "D:/Development/LEARN/spring-boot/microservices/hikari-microsync-code002/docker-compose",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -153,7 +161,7 @@
       <workItem from="1710209584349" duration="16530000" />
       <workItem from="1710280366403" duration="3345000" />
       <workItem from="1710387419624" duration="21496000" />
-      <workItem from="1710467936695" duration="850000" />
+      <workItem from="1710467936695" duration="3549000" />
     </task>
     <servers />
   </component>

@@ -61,7 +61,7 @@ services:
 ##      service: microservice-db-config
 
   configserver:
-    image: "hikaruyuzu/config-server:s8"
+    image: "hikaruyuzu/config-server:s9"
     container_name: configserver
     ports:
       - 8888:8888
@@ -78,7 +78,7 @@ services:
       SPRING_APPLICATION_NAME: "configserver"
 
   eurekaserver:
-    image: "hikaruyuzu/eureka-server:s8"
+    image: "hikaruyuzu/eureka-server:s9"
     container_name: eurekaserver
     ports:
       - "8761:8761"
@@ -98,8 +98,34 @@ services:
       SPRING_PROFILES_ACTIVE: default
       SPRING_APPLICATION_NAME: "eurekaserver"
 
+  gatewayserver:
+    image: "hikaruyuzu/gateway-server:s9"
+    container_name: gatewayserver
+    ports:
+      - 8072:8072
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+      accounts:
+        condition: service_healthy
+      loans:
+        condition: service_healthy
+      cards:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_APPLICATION_NAME: "gatewayserver"
+    #    depends_on:
+    #      accounts-db:
+    #        condition: service_healthy
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
   accounts:
-    image: "hikaruyuzu/users-service:s8"
+    image: "hikaruyuzu/users-service:s9"
     container_name: accounts-service
     ports:
       - 8080:8080
@@ -108,6 +134,12 @@ services:
         condition: service_healthy
       eurekaserver:
         condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_APPLICATION_NAME: "accounts"
@@ -120,15 +152,21 @@ services:
 
 
   loans:
-    image: "hikaruyuzu/loans-service:s8"
+    image: "hikaruyuzu/loans-service:s9"
     container_name: loans-service
     ports:
-      - 8090:8080
+      - 8090:8090
     depends_on:
       configserver:
         condition: service_healthy
       eurekaserver:
         condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8090/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_APPLICATION_NAME: "loans"
@@ -137,15 +175,21 @@ services:
       service: microservice-eureka-config
 
   cards:
-    image: "hikaruyuzu/cards-service:s8"
+    image: "hikaruyuzu/cards-service:s9"
     container_name: cards-service
     ports:
-      - 9000:8080
+      - 9000:9000
     depends_on:
       configserver:
         condition: service_healthy
       eurekaserver:
         condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:9000/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_APPLICATION_NAME: "cards"
