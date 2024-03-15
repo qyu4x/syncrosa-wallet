@@ -63,7 +63,7 @@ public class CustomerController {
             @RequestHeader("X-Syncrosa-Trace-Id") String traceId,
             @Pattern(regexp = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$")
             @RequestParam(value = "phone", required = true) String phone) {
-        log.info("Request from: {} with traceId: {}", this.getClass(), traceId);
+        log.debug("Request from: {} with traceId: {}", this.getClass(), traceId);
         CustomerDetailResponse customerDetailResponse = customerService.findDetailByPhone(phone);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(WebResponse.<CustomerDetailResponse>builder()
