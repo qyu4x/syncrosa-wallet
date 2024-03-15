@@ -22,12 +22,12 @@ public class RequestTraceFilter implements Ordered, GlobalFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         List<String> traceIds = exchange.getRequest().getHeaders()
                 .get(X_SYNCROSA_TRACE_ID);
-        if (!traceIds.isEmpty()) {
+        if (traceIds != null) {
             log.debug("{} FOUND in {}: {}", X_SYNCROSA_TRACE_ID, this.getClass(), traceIds.get(0));
         } else {
             String traceId = UUID.randomUUID().toString();
             exchange.mutate().request(request -> request.header(X_SYNCROSA_TRACE_ID, traceId)).build();
-            log.debug("{} GENERATED in {}: {}", X_SYNCROSA_TRACE_ID, this.getClass(), traceIds.get(0));
+            log.debug("{} GENERATED in {}: {}", X_SYNCROSA_TRACE_ID, this.getClass(),traceId);
         }
 
         return chain.filter(exchange);
