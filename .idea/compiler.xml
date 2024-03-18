@@ -8,10 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="loans-service" />
-        <module name="gateway-server" />
         <module name="cards-service" />
         <module name="users-service" />
+        <module name="gateway-server" />
         <module name="eureka-server" />
+        <module name="message-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -22,6 +23,7 @@
       <module name="eureka-server" options="-parameters" />
       <module name="gateway-server" options="-parameters" />
       <module name="loans-service" options="-parameters" />
+      <module name="message-service" options="-parameters" />
       <module name="users-service" options="-parameters" />
     </option>
   </component>
