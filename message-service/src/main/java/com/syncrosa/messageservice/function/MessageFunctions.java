@@ -14,7 +14,7 @@ public class MessageFunctions {
     private final Logger log = LoggerFactory.getLogger(MessageFunctions.class);
 
     @Bean
-    public Function<AccountMessageEvent, AccountMessageEvent> sendEmail() {
+    public Function<AccountMessageEvent, AccountMessageEvent> email() {
         return accountMessageEvent -> {
             log.info("sending email with the details: {}", accountMessageEvent.toString());
             return accountMessageEvent;
@@ -22,7 +22,7 @@ public class MessageFunctions {
     }
 
     @Bean
-    public Function<AccountMessageEvent, Long> sendSms() {
+    public Function<AccountMessageEvent, Long> sms() {
         return accountMessageEvent -> {
             log.info("sending sms with the details: {}", accountMessageEvent.toString());
             return accountMessageEvent.accountNumber();

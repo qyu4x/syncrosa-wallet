@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c857fe7-be51-4f21-905d-8865b4021fd1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/message-service/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/src/main/java/com/syncrosa/messageservice/MessageServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/src/main/java/com/syncrosa/messageservice/event/AccountMessageEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/src/main/java/com/syncrosa/messageservice/function/MessageFunctions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/src/test/java/com/syncrosa/messageservice/MessageServiceApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users-service/src/main/java/com/syncrosa/usersservice/event/AccountMessageEvent.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../hikari-microsync-code003/config-server/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
@@ -37,11 +27,14 @@
       <change beforePath="$PROJECT_DIR$/../hikari-microsync-code001/loans-service/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hikari-microsync-code001/loans-service/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hikari-microsync-code001/loans-service/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hikari-microsync-code001/loans-service/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hikari-microsync-code001/loans-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../hikari-microsync-code001/loans-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cards-service/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cards-service/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message-service/src/main/java/com/syncrosa/messageservice/event/AccountMessageEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/src/main/java/com/syncrosa/messageservice/event/AccountMessageEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message-service/src/main/java/com/syncrosa/messageservice/function/MessageFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/src/main/java/com/syncrosa/messageservice/function/MessageFunctions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/java/com/syncrosa/usersservice/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/java/com/syncrosa/usersservice/service/impl/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/users-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +90,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "editor.preferences.fonts.default",
-    "spring.configuration.checksum": "0387ce2167c13e1b4017a47d628f983b",
+    "spring.configuration.checksum": "033b54b06c35851d9d4096e81218d184",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -106,6 +99,7 @@
       <recent name="D:\Development\LEARN\spring-boot\microservices\hikari-microsync-code002\config-server" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.syncrosa.usersservice.event" />
       <recent name="com.syncrosa.cardsservice.payload.client" />
     </key>
   </component>
@@ -175,7 +169,8 @@
       <workItem from="1710467936695" duration="4403000" />
       <workItem from="1710510492242" duration="1587000" />
       <workItem from="1710647318137" duration="1673000" />
-      <workItem from="1710775594227" duration="1233000" />
+      <workItem from="1710775594227" duration="3686000" />
+      <workItem from="1710817632231" duration="4858000" />
     </task>
     <servers />
   </component>

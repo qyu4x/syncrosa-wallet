@@ -2,6 +2,7 @@ package com.syncrosa.usersservice.service.impl;
 
 import com.syncrosa.usersservice.entity.Account;
 import com.syncrosa.usersservice.entity.Customer;
+import com.syncrosa.usersservice.event.AccountMessageEvent;
 import com.syncrosa.usersservice.helper.GenerateRandomID;
 import com.syncrosa.usersservice.payload.request.CreateCustomerRequest;
 import com.syncrosa.usersservice.payload.request.UpdateCustomerRequest;
@@ -11,6 +12,9 @@ import com.syncrosa.usersservice.repository.AccountRepository;
 import com.syncrosa.usersservice.repository.CustomerRepository;
 import com.syncrosa.usersservice.service.IAccountService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,11 +29,15 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class AccountServiceImpl implements IAccountService {
 
+    private final Logger log = LoggerFactory.getLogger(AccountServiceImpl.class);
+
     private CustomerRepository customerRepository;
 
     private AccountRepository accountRepository;
 
     private ValidationService validationService;
+
+    private StreamBridge streamBridge;
 
     @Override
     @Transactional
@@ -57,8 +65,17 @@ public class AccountServiceImpl implements IAccountService {
         accountRepository.save(account);
 
         customer.setAccount(account);
-
+        // send to rabbitmq
+        this.sendMessageEvent(account, customer);
         return this.toCustomerResponse(customer);
+    }
+
+    private void sendMessageEvent(Account account, Customer customer) {
+        AccountMessageEvent accountMessageEvent =
+                new AccountMessageEvent(account.getNumber(), customer.getName(), customer.getEmail(), customer.getPhone());
+        log.info("Sending communicaiton request for the details: {}", accountMessageEvent.toString());
+        boolean sendStatus = streamBridge.send("sendCommunication-out-0", accountMessageEvent);
+        log.info("Is the communication request successfully processed: {}", sendStatus);
     }
 
     @Override

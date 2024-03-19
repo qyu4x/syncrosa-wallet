@@ -20,6 +20,20 @@ spring:
         show_sql: true
         format_sql: true
 
+  cloud:
+    stream:
+      bindings:
+        sendCommunication-out-0:
+          destination: send-communication # exchange in mq name
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    connection-timeout: 10s
+
+
 management:
   endpoints:
     web:
@@ -64,3 +78,4 @@ logging:
     com:
       syncrosa:
         usersservice: DEBUG
+
