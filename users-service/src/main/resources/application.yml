@@ -21,10 +21,16 @@ spring:
         format_sql: true
 
   cloud:
+    function:
+      definition: receiveUpdatedMessageStatus
     stream:
       bindings:
+        receiveUpdatedMessageStatus-in-0:
+          destination: communication-sent
+          group: ${spring.application.name}
         sendCommunication-out-0:
           destination: send-communication # exchange in mq name
+
 
   rabbitmq:
     host: localhost

@@ -14,4 +14,5 @@ public interface IAccountService {
 
     void delete(String phone);
 
+    void updateEventStatus(Long accountNumber);
 }

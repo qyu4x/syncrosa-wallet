@@ -120,6 +120,11 @@ public class AccountServiceImpl implements IAccountService {
         customerRepository.delete(customer);
     }
 
+    @Override
+    public void updateEventStatus(Long accountNumber) {
+        log.info("updated account status by account number: {} inside database.", accountNumber);
+    }
+
     private Long generateRandomNumber() {
         return 10000000000L + new Random().nextInt(900000000);
     }
